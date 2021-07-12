@@ -1,0 +1,14 @@
+#!/bin/bash
+set -ex
+# GET PREVIOUS DB IP ADDRESS FROM CONFIG
+DB_ADDRESS=$(awk '/DB_HOST_ADDRESS:/{print}' /home/centos/Fiesta/config/config.js)
+OLD_IP="$(grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<< $DB_ADDRESS)"
+LAST_OCTET=$(awk -F"." '{print $4}'<<< $OLD_IP)
+# GET NEW NETWORK BASED ON CURRENT WEBSERVER IP ADDRESS
+NEW_NET=$(ip route get 1 | awk '{print $NF;exit}')
+NEW_NET=$(echo $NEW_NET | sed 's/\.[0-9]*$//')
+# NEW DATABASE IP, ASSUMING MATCHING OFFSET FROM SOURCE NETWORK WITH LEAP
+NEW_IP=$(echo $NEW_NET\.$LAST_OCTET)
+# REPLACE DATABASE VM IP AND RESTART FIESTA APP
+sudo sed -i "s/DB_HOST_ADDRESS:.*/DB_HOST_ADDRESS: '$NEW_IP',/g" /home/centos/Fiesta/config/config.js
+sudo systemctl restart fiesta
