@@ -19,55 +19,52 @@
 ..    1PC/onpremleap2_UPFO_1pc/onpremleap2_UPFO_1pc
 
 -------------------------
-Getting Started with Leap
+开启Leap容灾之旅
 -------------------------
 
-Overview
+概述
 ++++++++
 
-Significant enhancements to Leap were introduced with AOS 5.17 surrounding on-premises failover operations, including support for execution of guest scripts, and synchronous replication with AHV.
+围绕本地故障转移操作的 AOS 5.17 引入了对 Leap 的重大改进，包括支持Guest脚本的执行以及与 AHV 的同步复制。
 
-In this lab you will:
+在这个实验中你将会:
 
-- Use a multi-tier application - Fiesta - deployed by Calm
-- Protect your VMs with a Protection Policy
-- Build a Recovery Plan for runbook automation
-- Create changes to the Fiesta application database
-- Perform a failover to a physical Nutanix cluster
-- Access the Fiesta application to ensure changes were retained
-- Make additional changes to the Fiesta application database
-- Perform a failback from a physical Nutanix cluster
-- Access the Fiesta application to ensure changes were retained
+- 执行多层应用 - Fiesta - 由Calm部署
+- 使用保护策略保护您的虚拟机
+- 为 Runbook 自动化制定恢复计划
+- 创建对Fiesta应用程序数据库的更改
+- 对物理 Nutanix 集群执行故障转移
+- 访问Fiesta应用程序以确保保留更改
+- 对Fiesta应用程序数据库进行其他更改
+- 从物理 Nutanix 集群执行故障恢复
+- 访问Fiesta应用程序以确保保留更改
 
-This add-on Bootcamp provides exercises for BOTH **Unplanned** and **Planned** failover scenarios. As you complete one exercise, you may skip the configuration steps for the second exercise. You will use the same VMs, Protection Policy, and Recovery Plan for both exercises. This is also detailed in the introduction to each lab.
+这个实验为 **Unplanned** 和 **Planned** 故障转移场景提供练习，完成一个实验后，您可以跳过第二个实验的配置步骤。 您将在这两个实验中使用相同的虚拟机、保护策略和恢复计划。 这在每个实验的介绍中也有详细说明。
 
-What's New
+更新
 ++++++++++
 
-- Workshop updated using the following software versions:
+- 实验操作使用以下软件版本更新:
 
    - AOS - 5.19.2
    - AHV - el7.nutanix.20201105.1161
    - Prism Central - pc.2021.3.0.1
 
-Environment Requirements
+环境要求
 ++++++++++++++++++++++++
 
-- Two 4-node AHV clusters running AOS 5.17.1/AHV 20190916.189 or newer. Reserve two 4-node clusters in the same HPOC datacenter to ensure synchronous replication latency requirements are met (<5ms RTT).
+- 两个运行 AOS 5.17.1/AHV 20190916.189 或更新版本的 4 节点 AHV 集群。 在同一个 HPOC 数据中心预留两个 4 节点集群，以确保满足同步复制延迟要求（<5 毫秒 RTT）。
 
    .. note::
 
-      Leap's Recovery Plans require both clusters to have the same network prefix length (ex. /25, /26). Also, as this is meant as an add-on bootcamp, 4-node clusters are required. Do not mix single-node and 4-node clusters in this bootcamp environment.
+      Leap 的恢复计划要求两个集群具有相同的网络前缀长度（例如 /25、/26）。 此外，由于需要 4 节点集群。 不要在此实验环境中混合使用单节点和 4 节点集群。
 
-- You can run any standard Bootcamp staging on one cluster (e.g. **Enterprise Private Cloud Bootcamp**, **Databases: Era with MSSQL Bootcamp**, etc.) This will be your *Recovery* site cluster.
 
-- You **must** run the **Leap Add-On Bootcamp** staging on your additional cluster. This will be your *Primary* site cluster.
-
-- Follow the steps below to open the required ports: 2030, 2036, 2073, and 2090.
+- 按照以下步骤打开所需的端口: 2030, 2036, 2073, and 2090.
 
    .. note::
 
-      This step is necessary even if using two HPOC clusters in the same datacenter.
+      即使在同一数据中心使用两个 HPOC 集群，此步骤也是必要的。
 
    #. To open the ports for communication to the recovery cluster, run the following command on a CVM for the *Primary* site cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
 
