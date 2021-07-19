@@ -66,45 +66,45 @@
 
       即使在同一数据中心使用两个 HPOC 集群，此步骤也是必要的。
 
-   #. To open the ports for communication to the recovery cluster, run the following command on a CVM for the *Primary* site cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
+   #. 要打开与恢复集群通信的端口，请通过 SSH（例如 ssh nutanix@<CLUSTER-VIRTUAL-IP>）在 *Primary* 站点集群的 CVM 上运行以下命令：
 
       .. code-block:: bash
 
           allssh 'modify_firewall -f -r recovery_cvm_ip,recovery_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
-      Replace remote_cvm_ip with the IP addresses of the primary cluster CVMs, separated by a comma.
+      将 `remote_cvm_ip` 替换为主集群CVM的IP地址，用逗号隔开。
 
-      Replace remote_virtual_ip with the virtual IP address of the recovery cluster.
+      将 `remote_virtual_ip` 替换为恢复集群的虚拟 IP 地址。
 
-   #. To open the ports for communication to the primary cluster, run the following command on a CVM for the *Recovery* site cluster by remoting in via SSH (e.g. ssh nutanix@<CLUSTER-VIRTUAL-IP>):
+   #. 要打开与主集群通信的端口，请通过 SSH 远程连接（例如 ssh nutanix@<CLUSTER-VIRTUAL-IP>）在 *Recovery* 站点集群的 CVM 上运行以下命令：
 
       .. code-block:: bash
 
          allssh 'modify_firewall -f -r primary_cvm_ip,primary_virtual_ip -p 2030,2036,2073,2090 -i eth0'
 
-      Replace `source_cvm_ip` with the IP addresses of the primary cluster CVMs, separated by a comma.
+      将 `source_cvm_ip` 替换为主集群 CVM 的 IP 地址，以逗号分隔。
 
-      Replace `source_virtual_ip` with the virtual IP address of the primary cluster.
+      用主集群的虚拟IP地址替换 `source_virtual_ip` 。
 
-   #. Exit both SSH sessions.
+   #. 退出两个SSH会话。
 
    .. note::
 
-      For more information about the required ports, see the **General Requirements of Leap** section within the `Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Leap-Xi-Leap-Admin-Guide-v5_19:Leap-Xi-Leap-Admin-Guide-v5_19>`_.
+      有关所需端口的更多信息，请参阅`Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Leap-Xi-Leap-Admin-Guide-v5_19:Leap-Xi-Leap-Admin-Guide-v5_19>`_中的 **General Requirements of Leap** .
 
-- This staging script will automatically deploy **10** instances of the Fiesta application:
+- 此自动化脚本将自动部署 **10** 个Fiesta应用程序实例:
 
    - **User01-MYSQL-...**; **User01-WebServer-...**
    - **User02-MYSQL-...**; **User02-WebServer-...**
-   - And so on...
+   - 等等...
 
-- The instructor should assign a *User* number to each participant. The lab guide will reference entity names with *UserXX* which should be substituted for their specific number (e.g. *User01*).
+- 讲师已经每位参与者分配一个 *Userxx* 编号。 实验指南将使用 *UserXX* 引用实体名称，该名称应替换为它们的特定编号（例如 *User01*）。
 
-- It is recommended to rename the clusters within Prism to *Primary* and *Recovery* respectively. This will aid in identification during the labs.
+- 建议将 Prism 中的集群分别重命名为 *Primary* 和 *Recovery*。 这将有助于在实验期间进行识别。
 
-Reference
+参考
 +++++++++
 
-The following resources are provided for reference purposes, and aren't required to complete the lab exercises.
+以下资源仅供参考，不是完成实验练习所必需的。
 
 - `Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Leap-Xi-Leap-Admin-Guide-v5_19:Leap-Xi-Leap-Admin-Guide-v5_19>`_
