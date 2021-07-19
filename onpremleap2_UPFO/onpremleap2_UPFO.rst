@@ -23,29 +23,30 @@
 
 .. raw:: html
 
-   <strong><font color="red">The following steps should be performed by either the instructor or a designated user, as enabling Leap and configuring the Availability Zone are one-time operations per Prism Central instance.</font></strong>
+   <strong><font color="red">以下步骤应由讲师或一个用户执行，因为启用 Leap 和配置可用区是每个 Prism Central 的一次性操作。
+   </font></strong>
 
-Enable Leap
+启用Leap
 ...........
 
-#. Within your *Primary* site Prism Central, select :fa:`bars` **> Prism Central Settings**.
+#. 在 *Primary* 站点的Prism Central上, 选择 :fa:`bars` **> Prism Central Settings**.
 
-#. Within the *Setup* section, click **Enable Leap > Enable**.
+#. 选择 *Setup*d 选项, 点击 **Enable Leap > Enable**.
 
-#. Within *Recovery* site Prism Central, select :fa:`bars` **> Prism Central Settings**.
+#. 在 *Recovery* 站点的 Prism Central上, 选择 :fa:`bars` **> Prism Central Settings**.
 
-#. Within the *Setup* section, click **Enable Leap > Enable**.
+#. 选择 *Setup* 选项, 点击 **Enable Leap > Enable**.
 
-Creating a New Availability Zone
+创建新的Availability Zone
 ................................
 
-#. Within *Primary* site Prism Central, select :fa:`bars` **> Administration > Availability Zones**, and observe that a Local AZ has already been created by default.
+#. 在 *Primary* 站点的 Prism Central上, 选择 :fa:`bars` **> Administration > Availability Zones**, 并观察到默认情况下已经创建了Local AZ。
 
-#. Click **Connect to Availability Zone**
+#. 点击 **Connect to Availability Zone**
 
    .. figure:: images/AZ/1.png
 
-#. In the *Availability Zone Type* drop-down, select **Physical Location**. Enter the IP, username, and password for the *Recovery* site PC, and click **Connect**.
+#. 在 *Availability Zone Type* 选项下拉, 选择 **Physical Location**. 输入*Recovery* 站点 PC的IP地址, 用户名, 和密码 , 并点击 **Connect**.
 
    .. figure:: images/AZ/2.png
       :align: left
@@ -53,27 +54,27 @@ Creating a New Availability Zone
    .. figure:: images/AZ/3.png
       :align: right
 
-#. Observe that the *Recovery* site cluster is now listed as *Physical*, and its *Connectivity Status* is listed as *Reachable*.
+#. 请注意， *Recovery* 站点集群现在列为 *Physical*, 其 *Connectivity Status* 列为 *Reachable*.
 
-Staging Guest Script
+Staging Guest 脚本
 ++++++++++++++++++++
 
-Leap allows you to execute scripts within a guest to update configuration files, or perform other critical functions, as part of a runbook. In this exercise, you'll utilize a script on your WebServer VM that will automatically update its configured IP information for the MySQL VM connection. This allows the WebServer to connect to the MySQL database after any failover or failback operation.
+Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键功能，作为 Runbook 的一部分。 在本练习中，您将使用 WebServer VM 上的脚本，该脚本将自动更新 MySQL VM 连接的配置 IP 信息。 这允许 WebServer 在任何故障转移或故障回复操作后连接到 MySQL 数据库。
 
 .. raw:: html
 
-   <strong><font color="red">The below script has already been deployed, as Calm allows for easily inserting steps (such as this script) at any point during the deployment of a blueprint.
+   <strong><font color="red">下面的脚本已经部署，因为 Calm 允许在蓝图部署期间的任何时候轻松插入步骤（例如这个脚本）。
 
-   The following steps are included for illustration purposes only.</strong></font>
+   包含以下步骤仅用于说明目的。</strong></font>
 
 |
 
-   - SSH into your *UserXX*\ **-WebServer** VM using the following credentials:
+   -  使用以下口令SSH登录到你的 *UserXX*\ **-WebServer** 虚拟机:
 
       - **User Name** - centos
       - **Password**  - nutanix/4u
 
-   - Within the SSH session, execute the following commands. Click the icon in the upper right-hand corner of the below window to copy the commands to your clipboard. You may then paste that within your SSH session.
+   - 在 SSH 会话中，执行以下命令。 单击下面窗口右上角的图标，将命令复制到剪贴板。 然后，您可以将其粘贴到 SSH 会话中。
 
       .. code-block:: bash
 
@@ -82,93 +83,93 @@ Leap allows you to execute scripts within a guest to update configuration files,
 
       .. note::
 
-         If you'd like to view the contents of the failover script, execute:
+         如果您想查看故障转移脚本的内容，请执行:
 
          ``sudo cat /usr/local/sbin/production_vm_recovery``
 
-   - You may now exit the SSH session.
+   - 你现在可以退出SSH会话.
 
-Installing Nutanix Guest Tools
+安装 Nutanix Guest Tools
 ++++++++++++++++++++++++++++++
 
-In order to take advantage of the guest script functionality, Nutanix Guest Tools (NGT) must first be installed within the guest VMs being protected.
+为了利用Guest脚本功能，必须首先在受保护的Guest VM 中安装 Nutanix Guest Tools (NGT)。
 
-#. Within *Primary* site Prism Central, open :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. 在 *Primary* 站点的Prism Central中, 打开 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. Select both your *UserXX*\ **-WebServer** and *UserXX*\ **-MySQL** VMs.
+#. 选择两个你的 *UserXX*\ **-WebServer** 和 *UserXX*\ **-MySQL** VMs.
 
-#. Click **Actions > Install NGT**. You may need to scroll down in the drop-down list.
+#. 点击 **Actions > Install NGT**. 您可能需要在下拉列表中向下滚动.
 
    .. figure:: images/22.png
 
-#. Select **Restart as soon as the install is completed**, then click **Confirm & Enter Password**.
+#. 选择 **Restart as soon as the install is completed**, 然后点击 **Confirm & Enter Password**.
 
    .. figure:: images/23.png
 
-#. Provide the following credentials, and then click **Done** to begin the NGT installation:
+#. 输入以下凭证, 然后点击 **Done** 开始 NGT 的安装:
 
    - **User Name** - centos
    - **Password**  - nutanix/4u
 
    .. figure:: images/24.png
 
-#. Once both VMs have rebooted, validate that both VMs now have empty CD-ROM drives, and **Installed Version** displays **Latest** in Prism Central.
+#. 一旦两个 VM 都重新启动，验证两个 VM 现在都有空的 CD-ROM 驱动器，并且 **Installed Version** 在Prism Central中显示为 **Latest** 。
 
    .. figure:: images/25.png
 
-Creating A Protection Policy
+创建保护策略
 ++++++++++++++++++++++++++++
 
-A protection policy is where you specify your Recovery Point Objectives (RPO) and retention policies.
+保护策略是您指定恢复点目标 (RPO) 和保留策略。
 
-#. Within *Primary* site Prism Central, select, open :fa:`bars` **> Policies > Protection Policies**.
+#. 在 *Primary* 站点的Prism Central中, 选择, 打开 :fa:`bars` **> Policies > Protection Policies**.
 
-#. Click **Create Protection Policy**.
+#. 点击 **Create Protection Policy**.
 
-#. Within the **Policy name** field, enter *UserXX*\ **-FiestaProtection**.
+#. 在 **Policy name** 字段中, 输入 *UserXX*\ **-FiestaProtection**.
 
-#. Fill out the following fields within the *Primary Location* section, and then click **Save**.
+#. 在 *Primary Location* 字段中填写以下字段, 然后点击 **Save**.
 
    - **Location** - `Local AZ`
    - **Cluster** - Primary
 
-#. Fill out the following fields within the *Recovery Location* section, and then click **Save**.
+#. 在 *Recovery Location* 字段中填写以下字段, 然后点击 **Save**.
 
    - **Location** - `PC_<RECOVERY-SITE-PC-IP>`
    - **Cluster** - Recovery
 
-#. Click **+ Add Schedule**. Select **Synchronous > Save Schedule**, and then click **Next**.
+#. 点击 **+ Add Schedule**. 选择 **Synchronous > Save Schedule**, 然后点击 **Next**.
 
-#. Click **Create**.
+#. 点击 **Create**.
 
    .. note::
 
-      While we are not demonstrating this method, protection policies can be automatically applied based on category assignment, allowing VMs to be automatically protected from their initial provisioning.
+      虽然我们没有演示这种方法，但可以根据类别分配自动应用保护策略，从而允许从初始配置中自动保护虚拟机。
 
    .. figure:: images/Protection/protect1.png
 
-#. Within *Primary* site Prism Central, open :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. 在 *Primary* 站点的 Prism Central中, 打开 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. Select both your *UserXX*\ **-WebServer** and *UserXX*\ **-MySQL** VMs.
+#. 选择两个你的 *UserXX*\ **-WebServer** 和 *UserXX*\ **-MySQL** VMs.
 
-#. Click **Actions > Protect**.
+#. 点击 **Actions > Protect**.
 
-#. Select your *UserXX*\ **-FiestaRecovery** protection policy, and then click **Protect**.
+#. 选择你的 *UserXX*\ **-FiestaRecovery** 保护策略, 然后点击 **Protect**.
 
    .. figure:: images/Protection/protect2.png
 
-Creating A Recovery Plan
+创建恢复计划
 ++++++++++++++++++++++++
 
 .. note::
 
-   Just as with Protection Policies, you can also add categories to any protection policy.
+   与保护策略一样，您也可以向任何保护策略添加类别。
 
-#. Within your *Primary* site Prism Central, open :fa:`bars` **> Policies > Recovery Plans**.
+#. 在 *Primary* 站点的 Prism Central中, 打开 :fa:`bars` **> Policies > Recovery Plans**.
 
-#. Click **Create New Recovery Plan**.
+#. 点击 **Create New Recovery Plan**.
 
-#. Fill out the following fields within the *General* section, and then click **Next**.
+#. 在 *General* 字段中填写以下字段, 然后点击 **Next**.
 
    - **Recovery Plan Name** - *UserXX*\ **-FiestaRecovery**\
    - **Recovery Plan Name** - (optional)
@@ -179,45 +180,45 @@ Creating A Recovery Plan
 
 .. note::
 
-   If you do not see your VMs, the synchronization hasn't completed between sites. This is typically caused by attempting this step before the replication completes, but could indicate a communication issue between clusters. Check Prism Central for any errors, and if you are seeing issues initiating the stretch cluster, revisit the initial firewall instructions, and ensure those steps were performed correctly.
+   如果您没有看到您的 VM，则站点之间的同步尚未完成。 这通常是由于在复制完成之前尝试此步骤造成的，但也有可能是集群之间存在通信问题。 检查 Prism Central 是否有任何错误，如果您在启动延展集群时遇到问题，请重新访问初始防火墙说明，并确保正确执行了这些步骤。
 
-#. Under **Power On Sequence** we will add our VMs in stages to the plan. Click **+ Add Entities**.
+#. 在 **Power On Sequence** 下，我们将分阶段将你的虚拟机添加到计划中。点击 **+ Add Entities**.
 
-#. Select your *UserXX*\ **-MySQL** VM, and then click **Add**.
+#. 选择你的 *UserXX*\ **-MySQL** 虚拟机, 然后点击 **Add**.
 
-#. Click **+ Add New Stage**. Within **Stage 2**, click **+ Add Entities**.
+#. 点击 **+ Add New Stage**. 在 **Stage 2** 中, 点击 **+ Add Entities**.
 
    .. figure:: images/Recovery/3.png
 
-#. Select your *UserXX*\ **-WebServer** VM, and then click **Add**.
+#. 选择你的 *UserXX*\ **-WebServer** 虚拟机, 然后点击 **Add**.
 
    .. figure:: images/Recovery/4.png
 
-#. Click **Add**.
+#. 点击 **Add**.
 
-#. Select your *UserXX*\ **-WebServer** VM, and click **Manage Scripts > Enable**. This will trigger the *production_vm_recovery* script to run within the guest VM whenever a failover or failback occurs.
+#. 选择你的 *UserXX*\ **-WebServer** 虚拟机, 然后点击 **Manage Scripts > Enable**. 每当发生故障转移或故障回复时，这将触发 *production_vm_recovery* 脚本在Guest VM中运行。
 
-#. Click the **+ Add Delay**, shown in-between your two stages.
+#. 点击 **+ Add Delay**, 显示在你的两个阶段之间。
 
    .. figure:: images/Recovery/5.png
 
-#. Specify **60** seconds, and then click **Add**.
+#. 设为 **60** 秒, 然后点击 **Add**.
 
-#. Click **Next**.
+#. 点击 **Next**.
 
-   In the following steps, you will configure network settings which enable you to map networks in the local availability zone (*Primary* site), to networks at the recovery location (*Recovery* site).
+   在以下步骤中，您将配置网络设置，使您能够将本地availability zone(*Primary* site)中的网络映射到容灾站点 (*Recovery* site)的网络。
 
-#. Click **OK. Got it**.
+#. 点击 **OK. Got it**.
 
-#. Select **Primary** for all *Virtual Network or Port Group* entries.
+#. 为所有的 *Virtual Network or Port Group* 条目选择 **Primary** 。
 
    .. figure:: images/Recovery/6.png
 
-#. Click **Done**.
+#. 点击 **Done**.
 
    .. note::
 
-      Leap guest script locations
+      Leap guest 脚本位置
 
          - **Windows** (Relative to Nutanix directory in Program Files)
 
@@ -231,92 +232,92 @@ Creating A Recovery Plan
 
             Test: /usr/local/sbin/test_vm_recovery
 
-Performing An Unplanned Failover
+执行计划外故障转移
 ++++++++++++++++++++++++++++++++
 
-Failovers are initiated from the remote site, which can either be another on-premises Prism Central located at your DR site, or Xi Cloud Services.
+故障转移是从远程站点启动的，远程站点可以是位于您的 DR 站点的另一个本地 Prism Central，也可以是 Xi 云服务。
 
-In this exercise, we will be connecting to an on-premises Prism Central at the *Recovery* site, which we've already paired with the *Primary* site on-prem cluster.
+在本练习中，我们将连接到 *Recovery* 站点的本地 Prism Central，我们已经将其与 *Primary* 站点本地集群配对。
 
-Ensure that the VM name doesn't exist on the *Primary* cluster.
+确保 *Primary* 群集上不存在 VM 名称。
 
-Before performing our failover, let's make a quick update to our application.
+在执行故障转移之前，让我们快速更新我们的应用程序。
 
-#. Open `<http://USERXX-WEBSERVER-IP-ADDRESS>`_ in another browser tab. (ex. `<http://10.42.212.50>`_)
+#. 在另外一个浏览器页面打开 `<http://USERXX-WEBSERVER-IP-ADDRESS>`_ 。 (例如 `<http://10.42.212.50>`_)
 
-#. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
+#. 在 **Stores**下, 点击 **Add New Store** 并填写必填字段。 验证您的新商店是否出现在 UI 中。
 
    .. figure:: images/Failover/1.png
 
-#. Log in to Prism Central for your *Recovery* site.
+#. 登录 *Recovery* 站点的 Prism Central。
 
-#. Open :fa:`bars` **> Policies > Recovery Plans**.
+#. 打开 :fa:`bars` **> Policies > Recovery Plans**.
 
-#. Select your *UserXX*\ **-FiestaRecovery** plan, and then click **Actions > Failover**.
+#. 选择你的 *UserXX*\ **-FiestaRecovery** 计划, 然后点击 **Actions > Failover**.
 
-#. Under **Failover Type**, select **Unplanned Failover**, and then click **Failover**.
+#. 在 **Failover Type**下, 选择 **Unplanned Failover**, 然后点击 **Failover**.
 
    .. figure:: images/Failover/2.png
 
-#. Ignore any warnings in the Recovery AZ (*Recovery* site), and then click **Execute Anyway**.
+#. 忽略Recovery AZ (*Recovery* site)中的任何警告, 然后点击 **Execute Anyway**.
 
-#. Click on *UserXX*\ **-FiestaRecovery** to monitor status of plan execution. Select **Tasks > Failover** for full details.
+#. 点击 *UserXX*\ **-FiestaRecovery** 来监控计划执行的状态。选择 **Tasks > Failover** 以获取完整详细信息。
 
    .. figure:: images/Failover/4.png
 
    .. note::
 
-      If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a status of *Failed*.
+      如果您在启动故障转移之前收到验证警告，则 *Validating Recovery Plan* 步骤显示 *Failed* 是正常的。
 
-#. Once the Recovery Plan reaches 100%, click on the **X** at the top right-hand corner. This will take approximately 5 minutes.
+#. 恢复计划达到 100% 后，单击右上角的 **X** 。 这将需要大约 5 分钟。
 
-#. Open :fa:`bars` **> Virtual Infrastructure > VMs**, and note the *Recovery* site IP address of your *UserXX*\ **-WebServer**.
+#. 打开 :fa:`bars` **> Virtual Infrastructure > VMs**, 并记下你的 *UserXX*\ **-WebServer** 的 *Recovery* 站点的IP地址.
 
-#. Open `<http://USERXX-WEBSERVER-VM-RECOVERYSITE-IP-ADDRESS>`_ (ex. `<http://10.42.212.50>`_) in another browser tab and verify the change you'd made to your application is present.
+#. 在另一个浏览器选项卡中打开 `<http://USERXX-WEBSERVER-VM-RECOVERYSITE-IP-ADDRESS>`_ (例如 `<http://10.42.212.50>`_) 并验证您所做的更改 您的应用程序存在。
 
-Congratulations! You've completed your first DR failover with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
+恭喜！ 您已经使用 Nutanix AHV 完成了第一次灾难恢复故障转移，充分利用了本地 Leap Runbook 功能和同步复制。
 
-Performing An Unplanned Failback
+执行计划外故障恢复
 ++++++++++++++++++++++++++++++++
 
-Before performing our failback, let's make another update to our application.
+在执行故障恢复之前，让我们对应用程序进行另一次更新。
 
-#. Return to the browser tab for `<http://USERXX-WEBSERVER-VM-RECOVERYSITE-IP-ADDRESS>`_ (ex. `<http://10.42.212.50>`_).
+#. 在另个一个浏览器选项卡中打开 `<http://USERXX-WEBSERVER-VM-RECOVERYSITE-IP-ADDRESS>`_ (例如 `<http://10.42.212.50>`_).
 
-#. Under **Stores**, click **Add New Store**, and then fill out the required fields. Validate your new store appears in the UI.
+#. 在 **Stores**下, 点击 **Add New Store**, 然后填写要求的字段。 验证您的新商店是否出现在 UI 中。
 
    .. figure:: images/Failover/1.png
 
-#. Log in to Prism Central for your *Primary* site.
+#. 登录你*Primary* 站点中的Prism Central.
 
-#. Open :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. 打开 :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-#. Select both of your VMs, and then click **Actions > Delete**. Confirm by clicking **Delete**.
+#. 选择两个你的虚拟机, 然后点击 **Actions > Delete**. 确定已经选中 **Delete**.
 
-#. Open :fa:`bars` **> Policies > Recovery Plans**.
+#. 打开 :fa:`bars` **> Policies > Recovery Plans**.
 
-#. Select your *UserXX*\ **-FiestaRecovery** plan, and then click **Actions > Failover**.
-
-   .. figure:: images/Failover/2.png
-
-#. Under **Failover Type**, select **Unplanned Failover**, and then click **Failover**.
+#. 选择你的 *UserXX*\ **-FiestaRecovery** 计划, 然后点击 **Actions > Failover**.
 
    .. figure:: images/Failover/2.png
 
-#. Ignore any warnings in the Recovery AZ (*Primary* site), and then click **Execute Anyway**.
+#. 在 **Failover Type**下, 选择 **Unplanned Failover**, 然后点击 **Failover**.
 
-#. Click the name of your Recovery Plan to monitor status of plan execution. Select **Tasks > Failover** for full details.
+   .. figure:: images/Failover/2.png
+
+#. 忽略Recovery AZ (*Primary* site)中的任何警告, 然后点击 **Execute Anyway**.
+
+#. 单击您的恢复计划的名称以监控计划执行的状态。 选择 **Tasks > Failover** 以获取完整详细信息。
 
    .. figure:: images/Failover/4.png
 
 .. note::
 
-   If you had validation warnings before initiating failover, it is normal for the *Validating Recovery Plan* step to show a status of *Failed*.
+   如果您在启动故障转移之前收到验证警告，则 *Validating Recovery Plan* 步骤显示 *Failed* 状态是正常的.
 
-#. Once the Recovery Plan reaches 100%, click on the **X** at the top right-hand corner. This will take approximately 5 minutes.
+#. 恢复计划达到 100% 后，单击右上角的 **X** 。 这将需要大约 5 分钟。
 
-#. Open :fa:`bars` **> Virtual Infrastructure > VMs** and note the *Primary* site IP Address of your *UserXX*\ **-WebServer**.
+#. 打开 :fa:`bars` **> Virtual Infrastructure > VMs** 并且记下你的 *UserXX*\ **-WebServer** 的 *Primary* 站点IP地址.
 
-#. Open `<http://USERXX-WEBSERVER-VM-PRIMARYSITE-IP-ADDRESS>`_ in another browser tab, and then verify the change you'd made to your application is present.
+#.  在另个一个浏览器选项卡中打开 `<http://USERXX-WEBSERVER-VM-PRIMARYSITE-IP-ADDRESS>`_ ， 然后验证您对应用程序所做的更改是否存在。
 
-Congratulations! You've completed your first DR failback with Nutanix AHV, leveraging native Leap runbook capabilities, and synchronous replication.
+恭喜！ 您已经使用 Nutanix AHV 完成了第一次灾难恢复故障恢复，利用了原生 Leap Runbook 功能和同步复制。
