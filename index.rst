@@ -90,7 +90,7 @@
 
    .. note::
 
-      有关所需端口的更多信息，请参阅`Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Leap-Xi-Leap-Admin-Guide-v5_19:Leap-Xi-Leap-Admin-Guide-v5_19>`_中的 **General Requirements of Leap** .
+      有关所需端口的更多信息，请参阅`Xi Leap Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Leap-Xi-Leap-Admin-Guide-v5_19:Leap-Xi-Leap-Admin-Guide-v5_19>`_ 中的 **General Requirements of Leap** .
 
 - 此自动化脚本将自动部署 **10** 个Fiesta应用程序实例:
 
