@@ -1,24 +1,24 @@
 .. _onpremleap2_UPFO:
 
 ----------------------------
-Unplanned Failover with Leap
+使用Leap进行计划外故障转移
 ----------------------------
 
-There are 3 types of failovers: Test, Planned and Unplanned.
+有 3 种类型的故障转移：测试、计划和计划外。
 
-- **Test failovers** are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
+- **Test failovers** 用于测试恢复计划。 虚拟机按照恢复计划中的规定在测试网络中启动。 主站点的虚拟机不受影响。
 
-- **Planned failovers (PFO)** are when disruption of services is predicted at the primary site. The recovery plan will first create a snapshot of each VM, replicate, then start them at the recovery location. Those VMs no longer run at the primary site after a planned failover has occurred. Replication then begins in the reverse direction (from *Recovery* site to *Primary* site).
+- **Planned failovers (PFO)** 是在主站点预测服务中断的情况。 恢复计划将首先创建每个虚拟机的快照、复制，然后在容灾站点启动它们。 发生计划内的故障转移后，这些 VM 不再在主站点上运行。 然后以相反的方向开始复制（从 *Recovery* 站点到 *Primary* 站点）。
 
-- **Unplanned failovers (UPFO)** occur when a disaster has already occurred at the primary location. VMs are recovered from the most recent snapshot, and are started at the *Recovery* site.
+- **Unplanned failovers (UPFO)** 在主站点已经发生灾难的情况，虚拟机从最近的快照中恢复，并在 *Recovery* 站点启动。
 
-In this exercise you will perform an **Unplanned** failover of your application.
+在本练习中，您将对应用程序执行 **Unplanned** 故障转移。
 
 .. note::
 
-   If you have already completed the :ref:`onpremleap3_PFO` exercise, you can skip to `Performing An Unplanned Failover`_.
+   如果你已经安成了 :ref:`onpremleap3_PFO` 的练习, 你可以跳转到 `Performing An Unplanned Failover`_.
 
-Instructor Lead
+讲师指导
 +++++++++++++++
 
 .. raw:: html
