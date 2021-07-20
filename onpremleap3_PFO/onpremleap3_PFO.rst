@@ -16,7 +16,7 @@
 
 .. note::
 
-   如果你已经完成了 :ref:`onpremleap2_UPFO` 练习, 你可以跳到 `Performing A Planned Failover`_.
+   如果你已经完成了 :ref:`onpremleap2_UPFO` 练习, 你可以跳到 ` 执行计划内的故障转移 `_.
 
 讲师指导
 +++++++++++++++
