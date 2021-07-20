@@ -1,10 +1,10 @@
 .. _onpremleap3_PFO:
 
 ----------------------------
-Planned Failover with Leap
+使用 Leap 进行计划故障转移
 ----------------------------
 
-There are 3 types of failovers: Test, Planned and Unplanned.
+有 3 种类型的故障转移：测试、计划和计划外。
 
 - **Test failovers** are for testing a recovery plan. VMs are started in the test network as specified in the recovery plan. VMs at the primary location are not affected.
 
