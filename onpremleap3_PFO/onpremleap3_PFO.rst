@@ -232,7 +232,8 @@ Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键�
 
             Test: /usr/local/sbin/test_vm_recovery for Windows and Linux guests.
 
-执行计划内的故障转移
+Performing A Planned Failover
+执行计划内故障转移
 ++++++++++++++++++++++++++++++++
 
 故障转移是从远程站点启动的，远程站点可以是位于您的 DR 站点的另一个本地 Prism Central，也可以是 Xi 云服务。
@@ -282,7 +283,7 @@ Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键�
 Congratulations! You've completed your first DR failover with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 恭喜！ 您已经使用 Nutanix AHV 完成了第一次灾难恢复故障转移，充分利用了本地 Leap Runbook 功能和同步复制。
 
-Performing A Planned Failover
+执行计划内故障恢复
 ++++++++++++++++++++++++++++++++
 
 在执行故障恢复之前，让我们对应用程序进行另一次更新。
