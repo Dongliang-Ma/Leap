@@ -16,7 +16,7 @@
 
 .. note::
 
-   如果你已经完成了 :ref:`onpremleap2_UPFO` 练习, 你可以跳到 ` 执行计划内的故障转移 `_.
+   如果你已经完成了 :ref:`onpremleap2_UPFO` 练习, 你可以跳到 `Performing A Planned Failover`_.
 
 讲师指导
 +++++++++++++++
@@ -282,7 +282,7 @@ Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键�
 Congratulations! You've completed your first DR failover with Nutanix AHV, leveraging native Leap runbook capabilities and synchronous replication.
 恭喜！ 您已经使用 Nutanix AHV 完成了第一次灾难恢复故障转移，充分利用了本地 Leap Runbook 功能和同步复制。
 
-执行计划内的故障恢复
+Performing A Planned Failover
 ++++++++++++++++++++++++++++++++
 
 在执行故障恢复之前，让我们对应用程序进行另一次更新。
