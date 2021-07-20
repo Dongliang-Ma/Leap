@@ -29,7 +29,7 @@
 启用Leap
 ...........
 
-#. 在 *Primary* 站点的Prism Central上, 选择 :fa:`bars` **> Prism Central Settings**.
+#. 在 *Primary* 站点的Prism Central中, 选择 :fa:`bars` **> Prism Central Settings**.
 
 #. 选择 *Setup*d 选项, 点击 **Enable Leap > Enable**.
 
@@ -69,12 +69,12 @@ Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键�
 
 |
 
-   -  使用以下口令SSH登录到你的 *UserXX*\ **-WebServer** 虚拟机:
+- 使用以下口令SSH登录到你的 *UserXX*\ **-WebServer** 虚拟机:
 
       - **User Name** - centos
       - **Password**  - nutanix/4u
 
-   - 在 SSH 会话中，执行以下命令。 单击下面窗口右上角的图标，将命令复制到剪贴板。 然后，您可以将其粘贴到 SSH 会话中。
+- 在 SSH 会话中，执行以下命令。 单击下面窗口右上角的图标，将命令复制到剪贴板。 然后，您可以将其粘贴到 SSH 会话中。
 
       .. code-block:: bash
 
@@ -83,7 +83,7 @@ Leap 允许您在Guest中执行脚本以更新配置文件或执行其他关键�
 
       .. note::
 
-         如果您想查看故障转移脚本的内容，请执行:
+      如果您想查看故障转移脚本的内容，请执行:
 
          ``sudo cat /usr/local/sbin/production_vm_recovery``
 
